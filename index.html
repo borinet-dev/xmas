@@ -40,7 +40,7 @@
 		.s3 { text-shadow: 1px 1px 1px black; }
 	</style>
 	<meta charset="utf-8">
-	<title>와썹</title>
+	<title>나비</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta content="" name="keywords">
 	<meta content="" name="description">
@@ -80,7 +80,7 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-        <a href="https://l2wassub.org" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <a href="https://l2navi.org" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
             <img src="https://raw.githubusercontent.com/borinet-dev/img/main/logo_wassub.png" style="max-width: auto; height: auto;">
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -311,18 +311,14 @@
         
 
     <!-- Copyright Start -->
-    <div class="container-fluid copyright py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                 <b>   &copy; <a class="border-bottom" href="#">l2wassub.org</a>, All Right Reserved.</b>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <b>대한민국 대표서버 와썹</b>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div id="footer-placeholder"></div>
+	<script>
+	  fetch("https://borinet-dev.github.io/head/footer.html?ver=" + Date.now())
+	    .then(r => r.text())
+	    .then(html => {
+	      document.getElementById("footer-placeholder").innerHTML = html;
+	    });
+	</script>
     <!-- Copyright End -->
 
 
