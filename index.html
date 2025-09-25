@@ -71,35 +71,37 @@
     <!-- Spinner End -->
 
     <!-- Navbar Start -->
-		<!-- Header Start -->
-			<div id="header-placeholder"></div>
-			<script>
-			  (function () {
-				const url = "https://borinet-dev.github.io/head/header.html?ver=" + Date.now();
-				fetch(url)
-				  .then(r => r.text())
-				  .then(html => {
-					const holder = document.getElementById("header-placeholder");
-					holder.innerHTML = html;
+		<!-- Header (외부 include) -->
+		<div id="header-placeholder"></div>
 
-					// header.html에서 전달한 파비콘을 <head>에 반영
-					const fav = holder.querySelector('link[rel="navi-favicon"]');
-					if (fav) {
-					  let headIcon = document.head.querySelector("link[rel~='icon']");
-					  if (!headIcon) {
-						headIcon = document.createElement("link");
-						headIcon.rel = "icon";
-						document.head.appendChild(headIcon);
-					  }
-					  headIcon.href = fav.getAttribute("href");
-					}
-					// 제목 반영
-					const titleMeta = holder.querySelector('meta[name="web-title"]');
-					if (titleMeta) document.title = titleMeta.content;
-				  })
-				  .catch(console.error);
-			  })();
-			</script>
+		<script>
+		(function(){
+		  const url = "https://borinet-dev.github.io/head/header.html?ver=" + Date.now();
+		  fetch(url).then(r=>r.text()).then(html=>{
+			const holder = document.getElementById('header-placeholder');
+			// wrapper <div>를 nav로 교체 → sticky-top 정상 동작
+			holder.outerHTML = html;
+
+			// favicon/제목 반영
+			const temp = document.createElement("div");
+			temp.innerHTML = html;
+
+			const fav = temp.querySelector('link[rel="navi-favicon"]');
+			if (fav){
+			  let headIcon = document.head.querySelector("link[rel~='icon']");
+			  if(!headIcon){
+				headIcon=document.createElement('link');
+				headIcon.rel='icon';
+				document.head.appendChild(headIcon);
+			  }
+			  headIcon.href = fav.getAttribute('href');
+			}
+
+			const titleMeta = temp.querySelector('meta[name="web-title"]');
+			if (titleMeta) document.title = titleMeta.content;
+		  }).catch(console.error);
+		})();
+		</script>
 		<!-- Header End -->
 	<!-- Navbar End -->
 
@@ -354,3 +356,4 @@
 	<script src="https://borinet-dev.github.io/css/js/main.js"></script>
     </body>
 </html>
+
